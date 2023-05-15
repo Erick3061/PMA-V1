@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="azul">#000066</color>
+    <color name="rojo">#b70f0a</color>
+    <color name="gris">#37474f</color>
+    <color name="blanco">#FFFF</color>
+    <color name="negro">#000</color>
+    <!-- colors for button style -->
+    <color name="gradient_start_color">#4c84ff</color>
+    <color name="gradient_end_color">#7dcff4</color>
+    <!-- colors for tab and screent text -->
+    <color name="tab_indicator_gray">#c0c0c0</color>
+    <color name="intro_title_color">#000000</color>
+    <color name="intro_description_color">#656565</color>
+    <color name="transparentWhite">#cccccc</color>
+    <color name="backgroud">#24454b</color>
+    <color name="tb3">#7f0000</color>
+    <color name="grojo">#ee1717</color>
+    <color name="gverde">#0bd312</color>
+    <color name="gamarillo">#eeee17</color>
+    <color name="gazul">#0b0bfe</color>
+    <color name="gmorado">#960f96</color>
+    <color name="ggris">#646464</color>
+
+</resources>

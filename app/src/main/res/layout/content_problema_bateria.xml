@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <Switch
+        android:id="@+id/PB_MostrarGrafica"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="Mostrar grafica  "
+        android:textColor="@color/azul"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PB_MostrarGrafica">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:id="@+id/PB_LinearLayoutGraficas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical"
+                    >
+                    <TableLayout
+                        android:id="@+id/PB_table_Porcentajes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/PB_Eventos_TipoGrafica"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/PB_textView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="Tipo Gráfica"
+                        android:textColor="@color/azul"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <TableRow
+                        android:id="@+id/PB_BotonesGraficas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:padding="10dp">
+
+                        <ImageButton
+                            android:id="@+id/PB_pieButtonApCi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@color/design_default_color_on_primary"
+                            app:srcCompat="@mipmap/pie" />
+
+                        <ImageButton
+                            android:id="@+id/PB_dountButtonApCi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@color/design_default_color_on_primary"
+                            app:srcCompat="@mipmap/dount" />
+
+                        <ImageButton
+                            android:id="@+id/PB_barButtonApCi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@color/design_default_color_on_primary"
+                            app:srcCompat="@mipmap/bar" />
+
+                    </TableRow>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:text="Grafica Problema de bateria"
+                    android:textAlignment="center"
+                    android:textColor="@color/azul"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+
+                    android:id="@+id/PB_Grafica"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+            //demas cosas
+            <Button
+                android:id="@+id/PB_btnCSR"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/button_selector"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="@color/rojo"
+                android:textColorHint="#FFFFFF"
+                android:textCursorDrawable="@color/rojo"
+                android:padding="15dp"
+                />
+
+            <LinearLayout
+                android:id="@+id/PB_llTCSR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/PB_table_CSR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/PB_btnCCR"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_selector"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="@color/rojo"
+                android:textColorHint="#FFFFFF"
+                android:textCursorDrawable="@color/rojo"
+                android:padding="15dp"
+                />
+
+            <LinearLayout
+                android:id="@+id/PB_llTCCR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/PB_table_CCR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/PB_btnCSE"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_selector"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="@color/rojo"
+                android:textColorHint="#FFFFFF"
+                android:textCursorDrawable="@color/rojo"
+                android:padding="15dp"
+                />
+
+            <LinearLayout
+                android:id="@+id/PB_llTCSE"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/PB_table_CSE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/PB_DescargarPDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:contentDescription="@string/todo"
+        android:focusable="true"
+        app:backgroundTint="@color/rojo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/pdf" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

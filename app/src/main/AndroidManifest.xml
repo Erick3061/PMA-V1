@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.ACTION_OPEN_DOCUMENT_TREE" />
+    <uses-permission android:name="android.permission.RESTRICT_STORAGE_ACCESS_FRAMEWORK" />
+    <uses-permission android:name="android.permission.DEFAULT_SCOPED_STORAGE" />
+    <uses-permission android:name="android.permission.FORCE_ENABLE_SCOPED_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_MEDIA_STORAGE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ProblemaBateria"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_problema_bateria"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Actividad_ApCiI"
+            android:label="@string/title_activity_actividad_ap_ci_i"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".reporteAvanzado"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="@string/title_activity_reporte_avanzado"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AperturaCierreGrupo"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="HORARIO APERTURAS Y CIERRES"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CuentasAbiertas"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="ESTADO DE SUCURSALES"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".inicio"
+            android:exported="true"
+            android:theme="@style/SplashTheme1">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EventoAlarma"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="@string/title_activity_evento_alarma2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AperturaCierre"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="@string/title_activity_apertura_cierre2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".menu"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".InicioSesion"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".registrarse"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".olvide_contra"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:theme="@style/AppTheme2" />
+    </application>
+
+</manifest>

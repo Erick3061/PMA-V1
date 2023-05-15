@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.consultas.ConsutasFragment"
+    tools:ignore="ExtraText">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_consultas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="CONSULTA POR CUENTAS"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/CuentasM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/spiner_selector"
+                android:foregroundGravity="center_vertical|center|center_horizontal"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:outlineAmbientShadowColor="#FFFFFF"
+                android:outlineSpotShadowColor="#FFFFFF"
+                android:spinnerMode="dialog"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnAP_CI"
+                    android:layout_width="200dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/button_selector"
+                    android:text="APERTURA / CIERRE"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="@color/rojo"
+                    android:textColorHint="#FFFFFF"
+                    android:textCursorDrawable="@color/rojo"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnQAP_CI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/ic_dialog_info" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnAlarma"
+                    android:layout_width="200dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/button_selector"
+                    android:text="EVENTO DE ALARMA"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="@color/rojo"
+                    android:textColorHint="#FFFFFF"
+                    android:textCursorDrawable="@color/rojo"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnQAlarma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/ic_dialog_info" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/TAvanzada"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_consultas_avanzadas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="CONSULTA POR SELECCIÓN\n DE CUENTAS"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:id="@+id/LLAvanzada"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSeleccionarCuentas"
+                    android:layout_width="200dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/button_selector"
+                    android:text="AVANZADA"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="@color/rojo"
+                    android:textColorHint="#FFFFFF"
+                    android:textCursorDrawable="@color/rojo"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnQAvanzada"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:srcCompat="@android:drawable/ic_dialog_info" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_consultas2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/TG"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtC3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="CONSULTA POR GRUPOS"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+
+            <Spinner
+                android:id="@+id/Grupo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/spiner_selector"
+                android:foregroundGravity="center_vertical|center|center_horizontal"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:spinnerMode="dialog"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:id="@+id/LLPB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnProblemasDeBateria"
+                    android:layout_width="200dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/button_selector"
+                    android:text="PROBLEMAS DE BATERIA"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="@color/rojo"
+                    android:textColorHint="#FFFFFF"
+                    android:textCursorDrawable="@color/rojo"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnQProblemasDeBateria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/ic_dialog_info" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LLCA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnAbiertas"
+                    android:layout_width="200dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/button_selector"
+                    android:text="ESTADO DE SUCURSALES"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="@color/rojo"
+                    android:textColorHint="#FFFFFF"
+                    android:textCursorDrawable="@color/rojo"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnQAbiertas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/ic_dialog_info" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LLAPCIG"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnAPCIGrupo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="58dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/button_selector"
+                    android:text=" HORARIO \n APERTURAS Y CIERRES "
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="@color/rojo"
+                    android:textColorHint="#FFFFFF"
+                    android:textCursorDrawable="@color/rojo"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnQAPCIGrupo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/ic_dialog_info" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

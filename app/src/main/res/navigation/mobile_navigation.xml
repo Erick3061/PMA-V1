@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.pemsa.pemsamonitoreoapp.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_consultas"
+        android:name="com.pemsa.pemsamonitoreoapp.ui.consultas.ConsutasFragment"
+        android:label="@string/menu_consultas"
+        tools:layout="@layout/fragment_consultas"
+        >
+        <action
+            android:id="@+id/action_nav_consultas_to_aperturaCierre"
+            app:destination="@id/aperturaCierre" />
+        <action
+            android:id="@+id/action_nav_consultas_to_eventoAlarma"
+            app:destination="@id/eventoAlarma" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_cerrarsesion"
+        android:name="com.pemsa.pemsamonitoreoapp.ui.cerrarsesion.cerrarsesionFragment"
+        android:label="@string/menu_cerrarsesion"
+        tools:layout="@layout/fragment_cerrarsesion"
+        />
+    <fragment
+        android:id="@+id/nav_acercade"
+        android:name="com.pemsa.pemsamonitoreoapp.ui.acerca_de.acercade"
+        android:label="@string/acerca_de"
+        tools:layout="@layout/fragment_acercade"
+        />
+    <fragment
+        android:id="@+id/nav_cambiarcontra"
+        android:name="com.pemsa.pemsamonitoreoapp.ui.cambiarpassword.Cambiarpass"
+        android:label="@string/menu_cambiarcontra"
+        tools:layout="@layout/fragment_cambiarpass" />
+    <fragment
+        android:id="@+id/nav_consultasweb"
+        android:name="com.pemsa.pemsamonitoreoapp.ui.reportesgraficas.ConsultasWebFragment"
+        android:label="@string/menu_consultasweb"
+        tools:layout="@layout/fragment_consultasweb" />
+    <fragment
+        android:id="@+id/nav_paginaweb"
+        android:name="com.pemsa.pemsamonitoreoapp.ui.paginaweb.PaginaWebFragment"
+        android:label="PÁGINA WEB"
+        tools:layout="@layout/fragment_paginaweb" />
+    <activity
+        android:id="@+id/aperturaCierre"
+        android:name="com.pemsa.pemsamonitoreoapp.AperturaCierre"
+        android:label="activity_apertura_cierre"
+        tools:layout="@layout/activity_apertura_cierre" />
+    <activity
+        android:id="@+id/eventoAlarma"
+        android:name="com.pemsa.pemsamonitoreoapp.EventoAlarma"
+        android:label="activity_evento_alarma"
+        tools:layout="@layout/activity_evento_alarma" />
+
+
+
+</navigation>

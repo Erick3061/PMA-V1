@@ -1,0 +1,276 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|center_horizontal"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical"
+    android:background="@drawable/dialogredondo">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="172dp"
+                app:srcCompat="@mipmap/logo2"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="@string/t_rminos_y_condiciones"
+                android:textColor="@color/azul"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text="Es obligación del usuario de la aplicación, así como del titular respectivo, informar cambios en el personal que emplea la aplicación, notificando altas y bajas de manera oportuna."
+                android:textColor="@color/negro"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText,UnusedAttribute,VisualLintLongText" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text="La información proporcionada por la aplicación es de uso exclusivo para el usuario y PEMSA no es
+responsable del uso que dicho usuario haga de la información consultada."
+                android:textColor="@color/negro"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText,UnusedAttribute,VisualLintLongText" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text="El acceso a la información para consulta del cliente es independiente a la información resguardada
+en los servidores de PEMSA, y la falta de acceso a la misma no exime de ninguna manera al cliente
+del pago por el monitoreo de su sistema de alarma en adición a cualquier otro servicio contratado
+u obligaciones adquiridas con PEMSA."
+                android:textColor="@color/negro"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText,UnusedAttribute,VisualLintLongText" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text="Para acceder a la aplicación se requiere de un registro previo con el formato correspondiente por
+parte del titular a el cual solicitará por conducto de su asesor comercial."
+                android:textColor="@color/negro"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText,UnusedAttribute,VisualLintLongText" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text="PEMSA se reserva el derecho de brindar o denegar autorización de usuarios y titulares para el uso
+de su plataforma."
+                android:textColor="@color/negro"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText,UnusedAttribute" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text="La aplicación puede ser sometida a actualizaciones sin previo aviso."
+                android:textColor="@color/negro"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText,UnusedAttribute" />
+            <TextView
+                android:id="@+id/APri0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="AVISO DE PRIVACIDAD"
+                android:textColor="@color/azul"
+                android:textSize="24sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/APri1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp"
+                tools:targetApi="o"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/APri2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText,UnusedAttribute" />
+            <TextView
+                android:id="@+id/APri3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText,UnusedAttribute" />
+            <TextView
+                android:id="@+id/APri4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/APri5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/APri6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/APri7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/APri8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/APri9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/APri10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/APri11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/APri12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:text=" "
+                android:textColor="@color/negro"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    tools:context=".inicio">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/slideViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="672dp"
+        android:layout_centerInParent="false">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:layout_alignTop="@id/checar"
+        android:background="@color/blanco"
+        android:verticalScrollbarPosition="right">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/dotsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:visibility="visible" >
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/dotsLayout"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="false"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="0dp"
+        android:allowUndo="false"
+        android:background="?android:attr/activatedBackgroundIndicator"
+        android:foregroundGravity="bottom"
+        android:text="@string/atras"
+        android:textColor="@color/azul"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnnext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/slideViewPager"
+        android:layout_alignBottom="@id/dotsLayout"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="false"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="0dp"
+        android:background="?attr/actionBarItemBackground"
+        android:text="@string/siguiente"
+        android:textColor="@color/azul"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnirAapp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/slideViewPager"
+        android:layout_alignBottom="@id/dotsLayout"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="false"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="0dp"
+        android:background="?attr/actionBarItemBackground"
+        android:text="@string/ir_a_app"
+        android:textColor="@color/azul"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <CheckBox
+        android:id="@+id/checar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnback"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:minHeight="48dp"
+        android:text="@string/no_mostrar_bienvenida"
+        android:textColor="@color/azul"
+        android:textColorHighlight="@color/azul"
+        android:textColorHint="@color/azul"
+        android:textColorLink="@color/blanco"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+</RelativeLayout>

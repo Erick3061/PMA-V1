@@ -32,7 +32,7 @@ public class Parametros {
         Token = token;
     }
 
-    public String url ="http://192.168.1.93:3000/v1/";
+    public String url ="https://consultas.pem-sa.com.mx/v1/";
 
     public Retrofit Connection(String token){
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();

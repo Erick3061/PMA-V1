@@ -13,10 +13,6 @@
             android:id="@+id/nav_consultas"
             android:icon="@drawable/icon_consulta"
             android:title="@string/menu_consultas" />
-        <item
-            android:id="@+id/nav_cambiarcontra"
-            android:icon="@drawable/icon_cambiarcontra"
-            android:title="@string/menu_cambiarcontra" />
 
         <item
             android:id="@+id/nav_cerrarsesion"

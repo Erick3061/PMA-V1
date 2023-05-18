@@ -2,12 +2,15 @@ package com.pemsa.pemsamonitoreoapp.API;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Toast;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.pemsa.pemsamonitoreoapp.API.interfaces.InterfacesApi;
+import com.pemsa.pemsamonitoreoapp.API.models.Report;
 import com.pemsa.pemsamonitoreoapp.AperturaCierreGrupo;
 import com.pemsa.pemsamonitoreoapp.GRAFICAS.GraficaApCiGoD;
 import com.pemsa.pemsamonitoreoapp.R;
@@ -27,11 +30,12 @@ import retrofit2.Retrofit;
 public class getApCiGoD extends AsyncTask<String, Void, String> {
 
     ProgressDialog progressDialog;
-    Parametros geturl = new Parametros();
+    Parametros parametros = new Parametros();
     public static String JSON;
     Activity activity;
-    public getApCiGoD (){
-
+    Report data;
+    public getApCiGoD (Report data){
+        this.data=data;
     }
 
     public Activity getActivity() {
@@ -55,14 +59,21 @@ public class getApCiGoD extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-
-        String url = geturl.url;
-        String regreso = "";
-
-        if(strings[0].equals("1")){
-            regreso = ObtenerCuentasAbiertas(url,strings[1]);
+        try {
+            Retrofit retrofit= parametros.Connection(strings[0]);
+            InterfacesApi api = retrofit.create(InterfacesApi.class);
+            Response<JsonElement> response=api.getApCiweek(this.data.getJson()).execute();
+            if(response.isSuccessful()){
+                return  response.body().toString();
+            }else{
+                JsonObject json=new JsonObject();
+                json.addProperty("status",false);
+                json.addProperty("msg",response.toString()+"\n\n"+this.data.getJson());
+                return json.toString();
+            }
+        }catch (Exception e){
+            return e.getMessage();
         }
-        return regreso;
     }
 
     @Override
@@ -74,12 +85,14 @@ public class getApCiGoD extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s) {
         progressDialog.hide();
         progressDialog.dismiss();
-        try {
+
+         try {
+            ArrayList <String> tp = new ArrayList<>();
             JSONObject respuesta = new JSONObject(s);
             if(respuesta.has("status")){
-                Boolean status = false;
-                ArrayList <String> tp = new ArrayList<>();
-                if(respuesta.getBoolean("status")){
+                if(respuesta.has("msg") && !respuesta.getBoolean("status")){
+                    throw new RuntimeException(respuesta.getString("msg"));
+                }else{
                     JSONObject data = new JSONObject(respuesta.getString("data"));
                     JSONArray datos = new JSONArray(data.getString("datos"));
                     JSONObject FechasH = new JSONObject(data.getString("fechasH"));
@@ -156,18 +169,14 @@ public class getApCiGoD extends AsyncTask<String, Void, String> {
                     AperturaCierreGrupo.tableDynamic.addData(Final,3);
                 }
             }
-            if(respuesta.has("errors")){
-                JSONArray errors = new JSONArray(respuesta.getString("errors"));
-                JSONObject msg =new JSONObject(errors.get(0).toString());
-
-                Toast toast = Toast.makeText(activity.getApplicationContext(), msg.getString("msg"), Toast.LENGTH_LONG);
-                View view = toast.getView();
-                view.setBackgroundResource(R.drawable.dialogredondo);
-                toast.show();
+            else{
+                throw new RuntimeException("Server error");
             }
-
-        } catch (JSONException e) {
-            Toast.makeText(activity.getApplicationContext(),"Server error",Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            new AlertDialog.Builder(activity)
+                    .setTitle("Error")
+                    .setMessage(e.getMessage())
+                    .show();
         }
     }
 
@@ -175,35 +184,4 @@ public class getApCiGoD extends AsyncTask<String, Void, String> {
     protected void onCancelled(String s) {
         super.onCancelled(s);
     }
-
-    @SuppressLint("SimpleDateFormat")
-    public static String ObtenerCuentasAbiertas(String cadena, String param) {
-        String Anio="",Mes="",Dia="",Fecha="";
-        Anio=new SimpleDateFormat("yyyy").format(new Date());
-        Dia=new SimpleDateFormat("dd").format(new Date());
-        Mes=new  SimpleDateFormat("MM").format(new Date());
-        Fecha=Anio+"-"+Mes+"-"+Dia;
-
-        String result = "",token="",CG="",Type="";
-        String[] separado = param.split("___ESP___");
-        token=separado[0];
-        CG=separado[1];
-        Type=separado[2];
-        Parametros parametros = new Parametros();
-        Retrofit retrofit = parametros.Connection(token);
-        InterfacesApi api = retrofit.create(InterfacesApi.class);
-        Response<JsonElement> response2 = null;
-        try {
-            Response<JsonElement> response = api.getApCiGoD(Fecha,CG,Type).execute();
-            response2=response;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        result= response2.body().toString();
-
-        return result;
-
-    }
-
 }

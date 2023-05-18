@@ -5,34 +5,19 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.pemsa.pemsamonitoreoapp.API.crearUsuarios;
-import com.pemsa.pemsamonitoreoapp.API.models.CrearUsuario;
 import com.pemsa.pemsamonitoreoapp.TCAP.TCAP;
-
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import javax.mail.MessagingException;
 
 public class  registrarse extends AppCompatActivity {
 
@@ -46,7 +31,7 @@ public class  registrarse extends AppCompatActivity {
     public static Activity activity;
     public static  String name="",Direccion="",email="",CuentaNombre="";
 
-    crearUsuarios hilo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,9 +115,6 @@ public class  registrarse extends AppCompatActivity {
                             Direccion="Sin direccion";
                         }
 
-                        hilo = new crearUsuarios();
-                        hilo.setActivity(activity);
-                        hilo.execute("1",name + "___ESP___" + email + "___ESP___" + CuentaNombre + "___ESP___" +Direccion);
 
                         //Toast.makeText(activity.getApplicationContext(),"Datos Enviados",Toast.LENGTH_LONG).show();
                     }else {

@@ -13,13 +13,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.pemsa.pemsamonitoreoapp.API.cambiarPass;
 import com.pemsa.pemsamonitoreoapp.InicioSesion;
 import com.pemsa.pemsamonitoreoapp.R;
 import com.pemsa.pemsamonitoreoapp.ValidacionEditText;
@@ -34,7 +32,6 @@ public class Cambiarpass extends Fragment {
     EditText pass,passn1,passn2;
     Button cambiar;
     public static Activity activity;
-    cambiarPass hilo;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

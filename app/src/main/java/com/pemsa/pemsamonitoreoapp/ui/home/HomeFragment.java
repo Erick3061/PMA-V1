@@ -25,11 +25,11 @@ import com.pemsa.pemsamonitoreoapp.R;
 public class HomeFragment extends Fragment {
 
     ImageButton F,T,I,W,Web;
-    public static  String Mensajeria;
-    public static  String FacebookId;
-    public static  String FacebookUrl;
-    public static  String Instagram;
-    public static  String Twiter;
+    public static  String Mensajeria="//wa.me/5212225544667";
+    public static  String FacebookId="//page/557351134421255";
+    public static  String FacebookUrl="//www.facebook.com/PEMSA-Protecci%C3%B3n-Electr%C3%B3nica-Monterrey-SA-de-CV-557351134421255";
+    public static  String Instagram="//instagram.com/pemsa_85/";
+    public static  String Twiter="//twitter.com/pemsa_85";
 
     @SuppressLint("StaticFieldLeak")
     public static TextView correo;

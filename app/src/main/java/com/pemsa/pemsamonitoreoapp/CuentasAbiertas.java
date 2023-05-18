@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pemsa.pemsamonitoreoapp.API.getCuentasAbiertas;
+import com.pemsa.pemsamonitoreoapp.API.models.Report;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -90,9 +91,12 @@ public class CuentasAbiertas extends AppCompatActivity {
         recyclerFormato=(RecyclerView)findViewById(R.id.idRecicler2);
         recyclerFormato.setLayoutManager(new LinearLayoutManager(this));
 
-        cuentasAbiertas = new getCuentasAbiertas();
+        ArrayList<Integer> accounts= new ArrayList<Integer>();
+        accounts.add(Integer.parseInt(CG));
+
+        cuentasAbiertas = new getCuentasAbiertas(new Report(accounts,Integer.parseInt(Type)));
         cuentasAbiertas.setActivity(activity);
-        cuentasAbiertas.execute("1",token+"___ESP___"+CG+"___ESP___"+Type);
+        cuentasAbiertas.execute(token);
         //Toast.makeText(activity.getApplicationContext(),"entro",Toast.LENGTH_LONG).show();
 
         //------------------------------------------------------------------------------------------------------------------------------------

@@ -42,14 +42,14 @@ public class InicioSesion extends AppCompatActivity {
         setContentView(R.layout.actividad_inicio_sesion);
         //hacemos la asignacion de los objetos con los del activity
         btn=(Button)findViewById(R.id.btnIniciaSesion);
-        txtOlvideContra=(TextView)findViewById(R.id.txtOlvCon);
-        txtRegistrarse=(TextView)findViewById(R.id.txtR);
         titulo=(TextView)findViewById(R.id.titulo);
         TYCYAP=(TextView)findViewById(R.id.TermYCondYAviPriv);
-        VersionApp = ( TextView )findViewById( R.id.VersionApp);
 
-
-
+        new android.app.AlertDialog
+                .Builder(this).setTitle("Hay una nueva actualización de esta aplicación")
+                .setMessage("Todas las funciones están disponibles en nuestra nueva versión.")
+                .setPositiveButton("Actualiza ahora",(dialog, which) -> {
+                });
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

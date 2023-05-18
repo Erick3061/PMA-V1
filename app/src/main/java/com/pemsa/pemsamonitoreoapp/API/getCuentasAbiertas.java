@@ -2,13 +2,16 @@ package com.pemsa.pemsamonitoreoapp.API;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.pemsa.pemsamonitoreoapp.API.interfaces.InterfacesApi;
+import com.pemsa.pemsamonitoreoapp.API.models.Report;
 import com.pemsa.pemsamonitoreoapp.AdapterFormato;
 import com.pemsa.pemsamonitoreoapp.CuentasAbiertas;
 import com.pemsa.pemsamonitoreoapp.R;
@@ -25,14 +28,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class getCuentasAbiertas extends AsyncTask<String, Void, String> {
-
     ProgressDialog progressDialog;
-    Parametros geturl = new Parametros();
+    Parametros parametros = new Parametros();
     public static String JSON;
-    public static Activity activity;
+    public Activity activity;
     public static Response<JsonElement> response2 = null;
-    public getCuentasAbiertas (){
-
+    Report data;
+    public getCuentasAbiertas (Report data){
+        this.data=data;
     }
 
     public Activity getActivity() {
@@ -56,14 +59,21 @@ public class getCuentasAbiertas extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-
-        String url = geturl.url;
-        String regreso = "";
-
-        if(strings[0].equals("1")){
-            regreso = ObtenerCuentasAbiertas(url,strings[1]);
+        try {
+            Retrofit retrofit= parametros.Connection(strings[0]);
+            InterfacesApi api = retrofit.create(InterfacesApi.class);
+            Response<JsonElement> response=api.getReportState(this.data.getJson()).execute();
+            if(response.isSuccessful()){
+                return  response.body().toString();
+            }else{
+                JsonObject json=new JsonObject();
+                json.addProperty("status",false);
+                json.addProperty("msg",response.toString()+"\n\n"+this.data.getJson());
+                return json.toString();
+            }
+        }catch (Exception e){
+            return e.getMessage();
         }
-        return regreso;
     }
 
     @Override
@@ -75,12 +85,12 @@ public class getCuentasAbiertas extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s) {
         progressDialog.hide();
         progressDialog.dismiss();
-        //CuentasAbiertas.nombreGrupo.setText(s);
         try {
             JSONObject respuesta = new JSONObject(s);
             if(respuesta.has("status")){
-                Boolean status = false;
-                if(respuesta.getBoolean("status")){
+                if(respuesta.has("msg") && !respuesta.getBoolean("status")){
+                    throw new RuntimeException(respuesta.getString("msg"));
+                }else{
                     JSONObject data = new JSONObject(respuesta.getString("data"));
                     CuentasAbiertas.nombreGrupo.setText(data.getString("Nombre"));
                     JSONArray cuentasObj = new JSONArray(data.getString("datos"));
@@ -96,19 +106,14 @@ public class getCuentasAbiertas extends AsyncTask<String, Void, String> {
                     AdapterFormato adapterFormato= new AdapterFormato(CuentasAbiertas.LisDatos);
                     CuentasAbiertas.recyclerFormato.setAdapter(adapterFormato);
                 }
+            } else{
+                throw new RuntimeException("Server error");
             }
-            if(respuesta.has("errors")){
-                JSONArray errors = new JSONArray(respuesta.getString("errors"));
-                JSONObject msg =new JSONObject(errors.get(0).toString());
-
-                Toast toast = Toast.makeText(activity.getApplicationContext(), msg.getString("msg"), Toast.LENGTH_LONG);
-                View view = toast.getView();
-                view.setBackgroundResource(R.drawable.dialogredondo);
-                toast.show();
-            }
-
-        } catch (JSONException e) {
-            Toast.makeText(activity.getApplicationContext(),"Server error",Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            new AlertDialog.Builder(activity)
+                    .setTitle("Error")
+                    .setMessage(e.getMessage())
+                    .show();
         }
     }
 
@@ -116,39 +121,4 @@ public class getCuentasAbiertas extends AsyncTask<String, Void, String> {
     protected void onCancelled(String s) {
         super.onCancelled(s);
     }
-
-    @SuppressLint("SimpleDateFormat")
-    public static String ObtenerCuentasAbiertas(String cadena, String param) {
-        String Anio="",Mes="",Dia="",Fecha="";
-        Anio=new SimpleDateFormat("yyyy").format(new Date());
-        Dia=new SimpleDateFormat("dd").format(new Date());
-        Mes=new  SimpleDateFormat("MM").format(new Date());
-        Fecha=Anio+"-"+Mes+"-"+Dia;
-
-        String result = "",token="",CG="",Type="";
-        String[] separado = param.split("___ESP___");
-        token=separado[0];
-        CG=separado[1];
-        Type=separado[2];
-        Parametros parametros= new Parametros();
-        Retrofit retrofit = parametros.Connection(token);
-        InterfacesApi api = retrofit.create(InterfacesApi.class);
-
-        try {
-            Response<JsonElement> response =api.getCuentasAbiertas(Fecha,CG,Type).execute();
-            response2=response;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
- 
-        if(response2.isSuccessful()){
-            JSON =response2.body().toString();
-        }
-        if(response2.code()==404){
-            JSON="Error 404 Not Fount";
-        }
-        result= JSON;
-        return result;
-    }
-
 }

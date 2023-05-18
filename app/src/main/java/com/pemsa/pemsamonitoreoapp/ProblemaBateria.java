@@ -53,6 +53,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.pemsa.pemsamonitoreoapp.API.getCuentasAbiertas;
 import com.pemsa.pemsamonitoreoapp.API.getFecha;
 import com.pemsa.pemsamonitoreoapp.API.getProblemaBateria;
+import com.pemsa.pemsamonitoreoapp.API.models.Report;
 import com.pemsa.pemsamonitoreoapp.GRAFICAS.GraficaApCi;
 import com.pemsa.pemsamonitoreoapp.GRAFICAS.GraficaPB;
 import com.pemsa.pemsamonitoreoapp.databinding.ActivityProblemaBateriaBinding;
@@ -136,10 +137,6 @@ public class ProblemaBateria extends AppCompatActivity {
         btnCCR = ( Button )findViewById( R.id.PB_btnCCR );
         btnCSE = ( Button )findViewById( R.id.PB_btnCSE );
 
-        //hilos de ejecuacion
-        getProblemaBateria problemaBateria;
-
-
         //instancias
         activity=this;
         GraficaPB creaGrafica = new GraficaPB();
@@ -182,10 +179,11 @@ public class ProblemaBateria extends AppCompatActivity {
         llccr = ( LinearLayout )findViewById( R.id.PB_llTCCR );
         llcse = ( LinearLayout )findViewById( R.id.PB_llTCSE );
 
-
-        problemaBateria = new getProblemaBateria();
+        ArrayList<Integer> accounts= new ArrayList<Integer>();
+        accounts.add(Integer.parseInt(CG));
+        getProblemaBateria problemaBateria =new getProblemaBateria(new Report(accounts,Integer.parseInt(Type)));
         problemaBateria.setActivity(activity);
-        problemaBateria.execute("1",token+"___ESP___"+CG+"___ESP___"+Type);
+        problemaBateria.execute(token);
 
         linearLayoutGraf.setLayoutParams(lp2);
 

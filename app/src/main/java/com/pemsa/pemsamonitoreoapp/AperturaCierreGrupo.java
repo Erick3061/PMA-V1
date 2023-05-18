@@ -47,6 +47,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 import com.pemsa.pemsamonitoreoapp.API.getApCiGoD;
 import com.pemsa.pemsamonitoreoapp.API.getFecha;
+import com.pemsa.pemsamonitoreoapp.API.models.Report;
 import com.pemsa.pemsamonitoreoapp.GRAFICAS.GraficaApCi;
 import com.pemsa.pemsamonitoreoapp.GRAFICAS.GraficaApCiGoD;
 
@@ -196,9 +197,12 @@ public class AperturaCierreGrupo extends AppCompatActivity {
 
          nombreGrupo.setText(NG);
 
-         hilo= new getApCiGoD();
+         ArrayList<Integer> accounts= new ArrayList<Integer>();
+         accounts.add(Integer.parseInt(CG));
+
+         hilo= new getApCiGoD(new Report(accounts, Integer.parseInt(Type)));
          hilo.setActivity(activity);
-         hilo.execute("1",Token+"___ESP___"+CG+"___ESP___"+Type);
+         hilo.execute(Token);
 
         creado=false;
         linearLayoutGraf.setLayoutParams(lp2);

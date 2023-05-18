@@ -1,5 +1,6 @@
 package com.pemsa.pemsamonitoreoapp.API;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -38,7 +39,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class getRepA extends AsyncTask<String, Void, String> {
 
     ProgressDialog progressDialog;
-    public static  int identificador;
     public static String token;
 
     public static String getToken() {
@@ -49,18 +49,9 @@ public class getRepA extends AsyncTask<String, Void, String> {
         getRepA.token = token;
     }
 
-    public static int Codigos[];
-
-    public static int getIdentificador() {
-        return identificador;
-    }
-
-    public void setIdentificador(int identificador) {
-        this.identificador = identificador;
-    }
-
     Parametros parametros = new Parametros();
     public static String JSON;
+    @SuppressLint("StaticFieldLeak")
     Activity activity;
 
     ArrayList<Integer> accounts;
@@ -114,83 +105,58 @@ public class getRepA extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s) {
         progressDialog.hide();
         progressDialog.dismiss();
-        // try {
-        //     JSONObject respuesta = new JSONObject(s);
-        //     if(respuesta.has("status")){
-        //         if(respuesta.getBoolean("status")){
-        //             JSONArray data = new JSONArray(respuesta.getString("data"));
-        //             ArrayList<String> Datos=new ArrayList<>();
-        //             JSONArray Cuenta,Nombres,Eventos;
-        //             String NC="",DC="",a="";
-        //             String[] separado;
 
-        //             for(int i=0;i< data.length();i++){
-        //                 a="";
-        //                 Cuenta = (JSONArray) data.get(i);
-        //                 Nombres = (JSONArray) Cuenta.get(0);//Nombre y Direccion
-        //                 Eventos = (JSONArray) Cuenta.get(1);//Eventos
-
-        //                 String cambioCuenta="";
-        //                 NC=Nombres.get(0).toString().trim().replace(" ","_");
-        //                 DC=Nombres.get(1).toString().trim().replace(" ","___");
-
-        //                 if(Nombres.get(0).toString().trim().equals(cambioCuenta)==false){
-        //                     reporteAvanzado.ResultadoConsulta.add("NC "+NC+"***ER***"+DC);
-        //                     cambioCuenta=NC;
-        //                 }{
-        //                     if(getIdentificador()==1){//Apertura y Cierre
-        //                         JSONArray con = new JSONArray();
-        //                         for (int ii=0;ii<Eventos.length();ii++){
-        //                             JSONObject datos =new JSONObject(Eventos.get(ii).toString());
-        //                             separado=(datos.getString("FechaHora")).trim().split(" ");
-        //                             a=i+" "+Nombres.get(0).toString().trim().replace(" ",".")+" "+separado[0].trim()+" "+separado[1].trim().substring(0,8)+" "+(datos.getString("DescripcionEvent")).trim()+" "+(datos.getString("Particion")).trim()+" "+(datos.getString("CodigoZona")).trim()+" "+(datos.getString("NombreUsuario")).replace(" ",".").trim();
-        //                             con.put(a);
-        //                         }
-        //                         reporteAvanzado.ResultadoConsulta.add(con.toString());
-        //                     }
-        //                     if(getIdentificador()==2){//Evento de alarma
-        //                         JSONArray con = new JSONArray();
-        //                         for (int ii=0;ii<Eventos.length();ii++){
-        //                             JSONObject datos =new JSONObject(Eventos.get(ii).toString());
-        //                             separado=(datos.getString("FechaHora")).trim().split(" ");
-        //                             a=i+" "+Nombres.get(0).toString().trim().replace(" ",".")+" "+separado[0].trim()+" "+separado[1].trim().substring(0,8)+" "+(datos.getString("Particion")).trim()+" "+(datos.getString("DescripcionEvent")).replace(" ",".").trim()+" "+(datos.getString("CodigoZona")).trim()+" "+(datos.getString("Zona")).trim()+" "+(datos.getString("NombreUsuario")).replace(" ",".").trim()+(datos.getString("NombreZona")).replace(" ",".").trim();
-        //                             con.put(a);
-        //                         }
-        //                         reporteAvanzado.ResultadoConsulta.add(con.toString());
-        //                     }
-        //                     reporteAvanzado.ResultadoConsulta.add("evento");
-        //                 }
-        //             }
-        //             reporteAvanzado.tableDynamic= new TableDynamic(reporteAvanzado.tableLayout,activity.getApplicationContext());
-        //             reporteAvanzado.tableDynamic.addData(reporteAvanzado.ResultadoConsulta,4);
-
-        //         }
-        //     }
-        //     if(respuesta.has("errors")){
-        //         JSONArray errors = new JSONArray(respuesta.getString("errors"));
-        //         JSONObject msg =new JSONObject(errors.get(0).toString());
-
-        //         Toast toast = Toast.makeText(activity.getApplicationContext(), msg.getString("msg"), Toast.LENGTH_LONG);
-        //         View view = toast.getView();
-        //         view.setBackgroundResource(R.drawable.dialogredondo);
-        //         toast.show();
-        //     }
-
-        // } catch (JSONException e) {
-        //     Toast.makeText(activity.getApplicationContext(),"Server error\n"+e.getMessage(),Toast.LENGTH_LONG).show();
-        // }
- 
         try {
             JSONObject respuesta = new JSONObject(s);
             if(respuesta.has("status")){
                 if(respuesta.has("msg") && !respuesta.getBoolean("status")){
                     throw new RuntimeException(respuesta.getString("msg"));
                 }else{
+                    JSONArray data = new JSONArray(respuesta.getString("data"));
+                    JSONArray Cuenta,Nombres,Eventos;
+                    String NC="",DC="",a="";
+                    String[] separado;
 
-                    new AlertDialog.Builder(activity)
-                        .setTitle("Success")
-                        .setMessage(s)
-                        .show();
+                    for(int i=0;i< data.length();i++){
+                        a="";
+                        Cuenta = (JSONArray) data.get(i);
+                        Nombres = (JSONArray) Cuenta.get(0);//Nombre y Direccion
+                        Eventos = (JSONArray) Cuenta.get(1);//Eventos
+
+                        String cambioCuenta="";
+                        NC=Nombres.get(0).toString().trim().replace(" ","_");
+                        DC=Nombres.get(1).toString().trim().replace(" ","___");
+
+                        if(Nombres.get(0).toString().trim().equals(cambioCuenta)==false){
+                            reporteAvanzado.ResultadoConsulta.add("NC "+NC+"***ER***"+DC);
+                            cambioCuenta=NC;
+                        }{
+                            if(this.report==1){//Apertura y Cierre
+                                JSONArray con = new JSONArray();
+                                for (int ii=0;ii<Eventos.length();ii++){
+                                    JSONObject datos =new JSONObject(Eventos.get(ii).toString());
+                                    separado=(datos.getString("FechaHora")).trim().split(" ");
+                                    a=i+" "+Nombres.get(0).toString().trim().replace(" ",".")+" "+separado[0].trim()+" "+separado[1].trim().substring(0,8)+" "+(datos.getString("DescripcionEvent")).trim()+" "+(datos.getString("Particion")).trim()+" "+(datos.getString("CodigoZona")).trim()+" "+(datos.getString("NombreUsuario")).replace(" ",".").trim();
+                                    con.put(a);
+                                }
+                                reporteAvanzado.ResultadoConsulta.add(con.toString());
+                            }
+                            if(this.report==2){//Evento de alarma
+                                JSONArray con = new JSONArray();
+                                for (int ii=0;ii<Eventos.length();ii++){
+                                    JSONObject datos =new JSONObject(Eventos.get(ii).toString());
+                                    separado=(datos.getString("FechaHora")).trim().split(" ");
+                                    a=i+" "+Nombres.get(0).toString().trim().replace(" ",".")+" "+separado[0].trim()+" "+separado[1].trim().substring(0,8)+" "+(datos.getString("Particion")).trim()+" "+(datos.getString("DescripcionEvent")).replace(" ",".").trim()+" "+(datos.getString("CodigoZona")).trim()+" "+(datos.getString("Zona")).trim()+" "+(datos.getString("NombreUsuario")).replace(" ",".").trim()+(datos.getString("NombreZona")).replace(" ",".").trim();
+                                    con.put(a);
+                                }
+                                reporteAvanzado.ResultadoConsulta.add(con.toString());
+                            }
+                            reporteAvanzado.ResultadoConsulta.add("evento");
+                        }
+                    }
+                    reporteAvanzado.tableDynamic= new TableDynamic(reporteAvanzado.tableLayout,activity.getApplicationContext());
+                    reporteAvanzado.tableDynamic.addData(reporteAvanzado.ResultadoConsulta,4);
+
                 }
             }
             else{

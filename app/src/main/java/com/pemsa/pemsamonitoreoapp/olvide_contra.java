@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,14 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.pemsa.pemsamonitoreoapp.API.olvidePass;
-
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.mail.MessagingException;
-
 public class olvide_contra extends AppCompatActivity {
     public static TextView txtIC, txtIC2;
     public static EditText correo;
@@ -34,7 +25,6 @@ public class olvide_contra extends AppCompatActivity {
     public static String[] separado;
 
     public static Activity activity;
-    olvidePass hilo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +65,7 @@ public class olvide_contra extends AppCompatActivity {
                     //vaidar el correo
                     objValidar=new ValidacionEditText();
                     if (objValidar.isEmail(correo.getText().toString().trim())) {
-                        //consumir aqui .....
-                        hilo = new olvidePass();
-                        hilo.setActivity(activity);
-                        hilo.execute("1",correo.getText().toString().trim());
+
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Correo NO Valido", Toast.LENGTH_SHORT).show();

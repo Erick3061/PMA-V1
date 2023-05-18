@@ -193,19 +193,10 @@ public class reporteAvanzado extends AppCompatActivity implements DatePickerDial
                         hilo=new getRepA(CodCtas,dateFi.getText().toString(),dateFf.getText().toString(),1);
                         hilo.setActivity(activity);
                         hilo.execute(token);
-
                     }else{
-                        // hilo = new getRepA();
-                        // hilo.setActivity(activity);
-                        // hilo.setToken(token);
-                        // hilo.setIdentificador(2);
-                        // JSONObject cuentas = new JSONObject();
-                        // try {
-                        //     cuentas.put("cuentas",CodCtas);
-                        //     hilo.execute("1",dateFi.getText().toString()+"___ESP___"+dateFf.getText().toString(),cuentas.toString());
-                        // } catch (JSONException e) {
-                        //     Toast.makeText(activity.getApplicationContext(),"Error"+e.getMessage(),Toast.LENGTH_LONG).show();
-                        // }
+                        hilo=new getRepA(CodCtas,dateFi.getText().toString(),dateFf.getText().toString(),2);
+                        hilo.setActivity(activity);
+                        hilo.execute(token);
                     }
                     //isActivo=true;
                 }else {
@@ -280,7 +271,6 @@ public class reporteAvanzado extends AppCompatActivity implements DatePickerDial
             dateFf.setText(date);
         }
     }
-
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.pemsa.pemsamonitoreoapp.API.interfaces.InterfacesApi;
 import com.pemsa.pemsamonitoreoapp.AperturaCierre;
 import com.pemsa.pemsamonitoreoapp.AperturaCierreGrupo;
@@ -16,6 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Date;
+
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -60,14 +63,12 @@ public class getFecha extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-
-        String url = geturl.url;
-        String regreso = "";
-
-        if(strings[0].equals("11")){
-            regreso = ObtenerFecha(url);
-        }
-        return regreso;
+        JsonObject json= new JsonObject();
+        JsonObject fecha= new JsonObject();
+        fecha.addProperty("fecha",new Date().toLocaleString());
+        json.addProperty("status", true);
+        json.add("data", fecha);
+        return json.toString();
     }
 
     @Override
@@ -147,24 +148,4 @@ public class getFecha extends AsyncTask<String, Void, String> {
     protected void onCancelled(String s) {
         super.onCancelled(s);
     }
-
-    public static String ObtenerFecha(String cadena) {
-        String result;
-        Parametros parametros = new Parametros();
-        Retrofit retrofit = parametros.Connection("Sin token");
-        InterfacesApi api = retrofit.create(InterfacesApi.class);
-        Response<JsonElement> response2 = null;
-        try {
-            Response<JsonElement> response = api.getfecha().execute();
-            response2=response;
-        } catch (IOException e) {
-            Toast.makeText(activity.getApplicationContext(),"Error"+e.getMessage(),Toast.LENGTH_LONG).show();
-        }
-
-        result= response2.body().toString();
-
-        return result;
-
-    }
-
 }

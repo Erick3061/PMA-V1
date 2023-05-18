@@ -69,7 +69,8 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:importantForAutofill="no"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:text="ed.pe.r@hotmail.com" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -85,12 +86,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:text="123456" />
 
                 <Button
                     android:id="@+id/btnIniciaSesion"
                     android:layout_width="200dp"
-                    android:layout_height="36dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/button_selector"

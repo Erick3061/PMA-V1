@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
+import com.pemsa.pemsamonitoreoapp.API.getEventos;
 import com.pemsa.pemsamonitoreoapp.API.getRepA;
 
 import org.json.JSONArray;
@@ -136,13 +137,13 @@ public class reporteAvanzado extends AppCompatActivity implements DatePickerDial
 
 
         String date = calendar.get(Calendar.YEAR)+"-"+
-                (calendar.get(Calendar.MONTH)+1)+"-"+
+                String.format("%2s",calendar.get(Calendar.MONTH)+1).replace(' ','0')+"-"+
                 calendar.get(Calendar.DAY_OF_MONTH);
 
         calendar.add(Calendar.DAY_OF_MONTH,-30);
 
         String date2 = calendar.get(Calendar.YEAR)+"-"+
-                (calendar.get(Calendar.MONTH)+1)+"-"+
+                String.format("%2s",calendar.get(Calendar.MONTH)+1).replace(' ','0')+"-"+
                 calendar.get(Calendar.DAY_OF_MONTH);
 
         diaLimite = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -185,42 +186,31 @@ public class reporteAvanzado extends AppCompatActivity implements DatePickerDial
         CONSULTAR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(!isActivo){
                     ResultadoConsulta.clear();
                     ObtenSpinner = Lreportes.getSelectedItem().toString();
                     if(ObtenSpinner.equals("APERTURA/CIERRE")){
-                        hilo = new getRepA();
+                        hilo=new getRepA(CodCtas,dateFi.getText().toString(),dateFf.getText().toString(),1);
                         hilo.setActivity(activity);
-                        hilo.setToken(token);
-                        hilo.setIdentificador(1);
-                        JSONObject cuentas = new JSONObject();
-                        try {
-                            cuentas.put("cuentas",CodCtas);
-                            //pruebas.setText(cuentas.toString());
-                            hilo.execute("1",dateFi.getText().toString()+"___ESP___"+dateFf.getText().toString(),cuentas.toString());
-                        } catch (JSONException e) {
-                            Toast.makeText(activity.getApplicationContext(),"Error"+e.getMessage(),Toast.LENGTH_LONG).show();
-                        }
+                        hilo.execute(token);
+
+                    }else{
+                        // hilo = new getRepA();
+                        // hilo.setActivity(activity);
+                        // hilo.setToken(token);
+                        // hilo.setIdentificador(2);
+                        // JSONObject cuentas = new JSONObject();
+                        // try {
+                        //     cuentas.put("cuentas",CodCtas);
+                        //     hilo.execute("1",dateFi.getText().toString()+"___ESP___"+dateFf.getText().toString(),cuentas.toString());
+                        // } catch (JSONException e) {
+                        //     Toast.makeText(activity.getApplicationContext(),"Error"+e.getMessage(),Toast.LENGTH_LONG).show();
+                        // }
                     }
-                    if(ObtenSpinner.equals("EVENTO DE ALARMA")){
-                        hilo = new getRepA();
-                        hilo.setActivity(activity);
-                        hilo.setToken(token);
-                        hilo.setIdentificador(2);
-                        JSONObject cuentas = new JSONObject();
-                        try {
-                            cuentas.put("cuentas",CodCtas);
-                            hilo.execute("1",dateFi.getText().toString()+"___ESP___"+dateFf.getText().toString(),cuentas.toString());
-                        } catch (JSONException e) {
-                            Toast.makeText(activity.getApplicationContext(),"Error"+e.getMessage(),Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    isActivo=true;
+                    //isActivo=true;
                 }else {
                     ///pruebas.setText(Cuentas);
                 }
-
             }
         });
 

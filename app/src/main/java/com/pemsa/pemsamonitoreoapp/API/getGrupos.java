@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.pemsa.pemsamonitoreoapp.API.interfaces.InterfacesApi;
 import com.pemsa.pemsamonitoreoapp.R;
 import com.pemsa.pemsamonitoreoapp.ui.consultas.ConsutasFragment;
@@ -23,7 +24,7 @@ import retrofit2.Retrofit;
 public class getGrupos extends AsyncTask<String, Void, String> {
 
     ProgressDialog progressDialog;
-    Parametros geturl = new Parametros();
+    Parametros parametros = new Parametros();
     public static String JSON;
     Activity activity;
     public getGrupos (){
@@ -61,13 +62,19 @@ public class getGrupos extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... strings) {
 
-        String url = geturl.url;
-        String regreso = "";
-
-        if(strings[0].equals("1")){
-            regreso = ObtenerCuentas(url,strings[1]);
+        try {
+            Response<JsonElement> response=parametros.Connection(strings[0]).create(InterfacesApi.class).getGrupos().execute();
+            if(response.isSuccessful()){
+                return response.body().toString();
+            }else{
+                JsonObject json=new JsonObject();
+                json.addProperty("status",false);
+                json.addProperty("msg",response.toString());
+                return json.toString();
+            }
+        }catch (Exception e){
+            return e.getMessage();
         }
-        return regreso;
     }
 
     @Override
@@ -127,26 +134,4 @@ public class getGrupos extends AsyncTask<String, Void, String> {
     protected void onCancelled(String s) {
         super.onCancelled(s);
     }
-
-    public static String ObtenerCuentas(String cadena, String param) {
-
-        String result = "",token="",Uid="";
-        String[] separado = param.split("___ESP___");
-        token=separado[1];
-        Uid=separado[0];
-        Parametros parametros = new Parametros();
-        Retrofit retrofit = parametros.Connection(token);
-        InterfacesApi api = retrofit.create(InterfacesApi.class);
-        Response<JsonElement> response2 = null;
-        try {
-            Response<JsonElement> response = api.getGrupos(Uid).execute();
-            response2=response;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        result= response2.body().toString();
-        return result;
-
-    }
-
 }

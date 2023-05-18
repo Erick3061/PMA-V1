@@ -176,13 +176,13 @@ public class EventoAlarma extends AppCompatActivity implements DatePickerDialog.
 
 
         String date = calendar.get(Calendar.YEAR)+"-"+
-                (calendar.get(Calendar.MONTH)+1)+"-"+
+                String.format("%2s",calendar.get(Calendar.MONTH)+1).replace(' ','0')+"-"+
                 calendar.get(Calendar.DAY_OF_MONTH);
 
         calendar.add(Calendar.DAY_OF_MONTH,-30);
 
         String date2 = calendar.get(Calendar.YEAR)+"-"+
-                (calendar.get(Calendar.MONTH)+1)+"-"+
+                String.format("%2s",calendar.get(Calendar.MONTH)+1).replace(' ','0')+"-"+
                 calendar.get(Calendar.DAY_OF_MONTH);
 
         diaLimite = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -287,10 +287,9 @@ public class EventoAlarma extends AppCompatActivity implements DatePickerDialog.
                     Fecha_inicio=dateFi.getText().toString().trim();
                     Fecha_final=dateFf.getText().toString().trim();
                     tableDynamic=new TableDynamic(tableLayout,getApplicationContext());
-                    hilo=new getEventos();
+                    hilo=new getEventos(new int[]{Integer.parseInt(IdCuenta)},Fecha_inicio,Fecha_final,2);
                     hilo.setActivity(activity);
-                    hilo.setToken(token);
-                    hilo.execute("2",IdCuenta+"___ESP___"+Fecha_inicio+"___ESP___"+Fecha_final);
+                    hilo.execute(token);
                 }
                 isActivo=true;
             }

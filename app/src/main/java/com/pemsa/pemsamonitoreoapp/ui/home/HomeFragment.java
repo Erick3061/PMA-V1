@@ -42,8 +42,6 @@ public class HomeFragment extends Fragment {
     }
     public static Activity activity;
 
-    getContacto hilo;
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //se instancian los objetos
@@ -56,10 +54,6 @@ public class HomeFragment extends Fragment {
 
         //se hacen las cciones  de la aplicacion
         activity=getActivity();
-
-        hilo=new getContacto();
-        hilo.setActivity(activity);
-        hilo.execute("1");
 
         F.setOnClickListener(new View.OnClickListener() {
             @Override

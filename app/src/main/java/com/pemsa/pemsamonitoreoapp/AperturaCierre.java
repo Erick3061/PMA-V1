@@ -58,6 +58,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -170,15 +171,14 @@ public class AperturaCierre extends AppCompatActivity implements DatePickerDialo
         Date fecha= new Date();
         calendar.setTime(fecha);
 
-
         String date = calendar.get(Calendar.YEAR)+"-"+
-                (calendar.get(Calendar.MONTH)+1)+"-"+
+                String.format("%2s",calendar.get(Calendar.MONTH)+1).replace(' ','0')+"-"+
                calendar.get(Calendar.DAY_OF_MONTH);
 
         calendar.add(Calendar.DAY_OF_MONTH,-30);
 
         String date2 = calendar.get(Calendar.YEAR)+"-"+
-                (calendar.get(Calendar.MONTH)+1)+"-"+
+                String.format("%2s",calendar.get(Calendar.MONTH)+1).replace(' ','0')+"-"+
                 calendar.get(Calendar.DAY_OF_MONTH);
 
         diaLimite = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -292,20 +292,24 @@ public class AperturaCierre extends AppCompatActivity implements DatePickerDialo
         CONSULTAR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                if(!AperturaCierre.Grafica.isChecked()){
-                    graficas.removeAllViews();
-                    linearLayoutGraf.setLayoutParams(lp2);
+                try{
+                    int[] acc={Integer.parseInt(IdCuenta)};
+                    if(!AperturaCierre.Grafica.isChecked()){
+                        graficas.removeAllViews();
+                        linearLayoutGraf.setLayoutParams(lp2);
+                    }
+                    if(!isActivo){
+                        Fecha_inicio=dateFi.getText().toString().trim();
+                        Fecha_final=dateFf.getText().toString().trim();
+                        hilo=new getEventos(acc,Fecha_inicio,Fecha_final,1);
+                        hilo.setActivity(activity);
+                        hilo.execute(token);
+                    }
+                    isActivo=true;
                 }
-
-                if(!isActivo){
-                    Fecha_inicio=dateFi.getText().toString().trim();
-                    Fecha_final=dateFf.getText().toString().trim();
-                    hilo=new getEventos();
-                    hilo.setActivity(activity);
-                    hilo.setToken(token);
-                    hilo.execute("1",IdCuenta+"___ESP___"+Fecha_inicio+"___ESP___"+Fecha_final);
+                catch (NumberFormatException ex){
+                    ex.printStackTrace();
                 }
-                isActivo=true;
             }
         });
         creado=false;

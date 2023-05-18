@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -31,24 +32,25 @@ public class Parametros {
         Token = token;
     }
 
-    public String url ="https://consultas.pem-sa.com.mx";
+    public String url ="http://192.168.1.93:3000/v1/";
 
     public Retrofit Connection(String token){
-
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        String finalToken = token;
+
         httpClient.addInterceptor(new Interceptor() {
             @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request request = chain.request().newBuilder().addHeader("x-token",finalToken).build();
-                return chain.proceed(request);
+            public Response intercept(Chain chain) throws IOException {
+                Request newRequest  = chain.request().newBuilder()
+                        .addHeader("Authorization", "Bearer " + token)
+                        .build();
+                return chain.proceed(newRequest);
             }
         });
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient.connectTimeout(300, TimeUnit.SECONDS).writeTimeout(300, TimeUnit.SECONDS).readTimeout(300,TimeUnit.SECONDS).build())
+                .client(httpClient.build())
                 .build();
         return retrofit;
 

@@ -132,7 +132,7 @@ public class ConsutasFragment extends Fragment {
 
         hiloCuentas=new getCuentas();
         hiloCuentas.setActivity(activity);
-        hiloCuentas.execute("1",Uid+"___ESP___"+token);
+        hiloCuentas.execute(token);
         btnConsultaApCi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -406,7 +406,6 @@ public class ConsutasFragment extends Fragment {
                     }
                 });
         final AlertDialog dialog=builder.create();
-        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialogredondo);
         dialog.show();
     }
@@ -423,7 +422,6 @@ public class ConsutasFragment extends Fragment {
                     }
                 });
         final AlertDialog dialog=builder.create();
-        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialogredondo);
         dialog.show();
     }
@@ -452,8 +450,7 @@ public class ConsutasFragment extends Fragment {
             hilo2Grupos=new getGrupos();
             hilo2Grupos.setIdentificador(1);
             hilo2Grupos.setActivity(activity);
-            hilo2Grupos.execute("1",Uid+"___ESP___"+token);
-            //prueba.setText(token);
+            hilo2Grupos.execute(token);
         }
 
     }
@@ -465,20 +462,14 @@ public class ConsutasFragment extends Fragment {
             arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerGrupos.setAdapter(arrayAdapter2);
         }else{
-            //Toast.makeText(activity.getApplicationContext(),"No Tiene grupos",Toast.LENGTH_LONG).show();
-            //ocultamos el spinner
             spinnerGrupos.setVisibility(View.INVISIBLE);
             spinnerGrupos.setLayoutParams(lp2);
-            //ocultamos el linear layout de boton Problema de bateria
             linearLayoutProblemaBat.setVisibility(View.INVISIBLE);
             linearLayoutProblemaBat.setLayoutParams(lp2);
-            //ocultamos el linear layout de boton Cuentas Abiertas
             linearLayoutCA.setVisibility(View.INVISIBLE);
             linearLayoutCA.setLayoutParams(lp2);
-            //ocultamos el linear layout del boton Aperturas Cierres Grupos
             linearLayoutAPCIG.setVisibility(View.INVISIBLE);
             linearLayoutAPCIG.setLayoutParams(lp2);
-            //ocultamos el texto
             linearLayoutTG.setVisibility(View.INVISIBLE);
             linearLayoutTG.setLayoutParams(lp2);
         }

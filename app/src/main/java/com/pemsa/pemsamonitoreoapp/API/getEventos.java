@@ -2,13 +2,13 @@ package com.pemsa.pemsamonitoreoapp.API;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.Toast;
-
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.pemsa.pemsamonitoreoapp.API.interfaces.InterfacesApi;
+import com.pemsa.pemsamonitoreoapp.API.models.DataEvents;
 import com.pemsa.pemsamonitoreoapp.AperturaCierre;
 import com.pemsa.pemsamonitoreoapp.EventoAlarma;
 import com.pemsa.pemsamonitoreoapp.GRAFICAS.GraficaApCi;
@@ -17,7 +17,6 @@ import com.pemsa.pemsamonitoreoapp.R;
 import com.pemsa.pemsamonitoreoapp.TableDynamic;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -27,43 +26,19 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class getEventos extends AsyncTask<String, Void, String> {
-
     ProgressDialog progressDialog;
-    public static String tipo, token;
-    public static boolean verGrafica;
-
-    public static boolean isVerGrafica() {
-        return verGrafica;
-    }
-
-    public static void setVerGrafica(boolean verGrafica) {
-        getEventos.verGrafica = verGrafica;
-    }
-
-    public static String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        getEventos.token = token;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        getEventos.tipo = tipo;
-    }
-
-
-    public static Parametros geturl = new Parametros();
-    public static String JSON;
+    public static Parametros parametros = new Parametros();
     @SuppressLint("StaticFieldLeak")
-    public static Activity activity;
+    public Activity activity;
+    String fechaInicio,fechaFinal, token;
+    int[] accounts;
+    int report;
 
-    public getEventos(){
-
+    public getEventos(int[] accounts, String fechaInicio,String fechaFinal,int report){
+        this.accounts=accounts;
+        this.fechaInicio=fechaInicio;
+        this.fechaFinal=fechaFinal;
+        this.report=report;
     }
 
     public Activity getActivity() {
@@ -71,7 +46,7 @@ public class getEventos extends AsyncTask<String, Void, String> {
     }
 
     public void setActivity(Activity activity) {
-        getEventos.activity = activity;
+        this.activity = activity;
     }
 
     @Override
@@ -87,19 +62,15 @@ public class getEventos extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-
-        String url = geturl.url;
-        String regreso = "";
-
-        if(strings[0].equals("1")){
-            setTipo(strings[0]);
-            regreso = ObtenerAPCI(url,strings[1]);
+        try {
+            this.token=strings[0];
+            return getEvents().toString();
+        }catch (Exception e){
+            JsonObject json=new JsonObject();
+            json.addProperty("status", false);
+            json.addProperty("msg", e.getMessage());
+            return json.toString();
         }
-        if(strings[0].equals("2")){
-            setTipo(strings[0]);
-            regreso = ObtenerEA(url,strings[1]);
-        }
-        return regreso;
     }
 
     @Override
@@ -114,8 +85,9 @@ public class getEventos extends AsyncTask<String, Void, String> {
         try {
             JSONObject respuesta = new JSONObject(s);
             if(respuesta.has("status")){
-                Boolean status = false;
-                if(respuesta.getBoolean("status")){
+                if(respuesta.has("msg") && !respuesta.getBoolean("status")){
+                    throw new RuntimeException(respuesta.getString("msg"));
+                }else{
                     JSONObject data = new JSONObject(respuesta.getString("data"));
                     JSONArray eventos = new JSONArray(data.getString("datos"));
                     JSONObject porcentajes = new JSONObject(data.getString("porcentajes"));
@@ -123,8 +95,8 @@ public class getEventos extends AsyncTask<String, Void, String> {
                     String a ="";
                     String[] separado;
                     ArrayList<String> Datos=new ArrayList<>();
-                    switch (getTipo()){
-                        case "1":
+                    switch (this.report){
+                        case 1:
                             if(AperturaCierre.Grafica.isChecked()){
                                 AperturaCierre.lp.setMargins(20,0,20,0);
                                 AperturaCierre.linearLayoutGraf.setLayoutParams(AperturaCierre.lp);
@@ -155,7 +127,7 @@ public class getEventos extends AsyncTask<String, Void, String> {
                             AperturaCierre.rows=Datos;
                             AperturaCierre.creapdf=true;
                         break;
-                        case "2":
+                        case 2:
                             //Toast.makeText(activity.getApplicationContext(),porcentajes.toString(),Toast.LENGTH_LONG).show();
                             if(EventoAlarma.Grafica.isChecked()){
                                 EventoAlarma.lp.setMargins(20,0,20,0);
@@ -191,18 +163,14 @@ public class getEventos extends AsyncTask<String, Void, String> {
                     }
                 }
             }
-            if(respuesta.has("errors")){
-                JSONArray errors = new JSONArray(respuesta.getString("errors"));
-                JSONObject msg =new JSONObject(errors.get(0).toString());
-
-                Toast toast = Toast.makeText(activity.getApplicationContext(), msg.getString("msg"), Toast.LENGTH_LONG);
-                View view = toast.getView();
-                view.setBackgroundResource(R.drawable.dialogredondo);
-                toast.show();
+            else{
+                throw new RuntimeException("Server error");
             }
-
-        } catch (JSONException e) {
-            Toast.makeText(activity.getApplicationContext(),"Server error",Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            new AlertDialog.Builder(activity)
+                    .setTitle("Error")
+                    .setMessage(e.getMessage())
+                    .show();
         }
     }
 
@@ -211,51 +179,27 @@ public class getEventos extends AsyncTask<String, Void, String> {
         super.onCancelled(s);
     }
 
-    public static String ObtenerAPCI(String cadena, String param) {
-
-        String result = "",idCuenta="",Fi="",Ff="";
-        String[] separado = param.split("___ESP___");
-        idCuenta=separado[0].trim();
-        Fi=separado[1].trim();
-        Ff=separado[2].trim();
-        Retrofit retrofit = geturl.Connection(getToken());
+    public JsonElement getEvents() {
+        Retrofit retrofit = parametros.Connection(this.token);
         InterfacesApi api = retrofit.create(InterfacesApi.class);
-        Response<JsonElement> response2 = null;
+        JsonObject data= new DataEvents(this.accounts,1,this.fechaInicio,this.fechaFinal,false).dataJson();
         try {
-            Response<JsonElement> response = api.getApCi(idCuenta,Fi,Ff).execute();
+            System.out.println(data);
+            Response<JsonElement> response = this.report==1?api.getApCi(data).execute(): api.getEA(data).execute();
             if(response.isSuccessful()){
-                response2=response;
+                return response.body();
+            }else {
+                JsonObject json = new JsonObject();
+                json.addProperty("status", false);
+                json.addProperty("msg", response.toString());
+                return json;
             }
         } catch (IOException e) {
-            Toast.makeText(activity.getApplicationContext(),"Error en la consulta\n"+e.getMessage(),Toast.LENGTH_LONG).show();
+            JsonObject json=new JsonObject();
+            json.addProperty("status", false);
+            json.addProperty("msg", e.getMessage());
+            return json;
         }
-
-        result= response2.body().toString();
-
-        return result;
-
-    }
-
-    public static String ObtenerEA(String cadena, String param) {
-
-        String result = "",idCuenta="",Fi="",Ff="";
-        String[] separado = param.split("___ESP___");
-        idCuenta=separado[0].trim();
-        Fi=separado[1].trim();
-        Ff=separado[2].trim();
-        Retrofit retrofit = geturl.Connection(getToken());
-        InterfacesApi api = retrofit.create(InterfacesApi.class);
-        Response<JsonElement> response2 = null;
-        try {
-            Response<JsonElement> response = api.getEA(idCuenta,Fi,Ff).execute();
-            response2=response;
-        } catch (IOException e) {
-            Toast.makeText(activity.getApplicationContext(),"Error en la consulta\n"+e.getMessage(),Toast.LENGTH_LONG).show();
-        }
-        result= response2.body().toString();
-
-        return result;
-
     }
 
 }

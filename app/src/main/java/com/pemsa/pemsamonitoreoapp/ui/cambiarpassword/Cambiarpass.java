@@ -67,35 +67,12 @@ public class Cambiarpass extends Fragment {
         cambiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(pass.getText().toString().trim().equalsIgnoreCase("")){
-                    Toast.makeText(v.getContext(),"DEBE INGRESAR SU CONTRSEÑA",Toast.LENGTH_SHORT).show();
-                }else{
-                        if(!pass.getText().toString().trim().equalsIgnoreCase("")){
-                            if(passn1.getText().toString().trim().equalsIgnoreCase("")){
-                                Toast.makeText(v.getContext(),"DEBE INSERTAR\n SU NUEVA CONTRASEÑA",Toast.LENGTH_SHORT).show();
-                            }else{
-                                if(passn2.getText().toString().trim().equalsIgnoreCase("")){
-                                    Toast.makeText(v.getContext(),"DEBE CONFIRMAR\n SU CONTRASEÑA",Toast.LENGTH_SHORT).show();
-                                }else{
-                                    boolean igules;
-                                    igules=validacionEditText.iguales(passn1.getText().toString(),passn2.getText().toString());
-                                    if(igules){
-                                        hilo= new cambiarPass();
-                                        hilo.setActivity(activity);
-                                        hilo.execute( "1", N + "___ESP___" + uid + "___ESP___" + token + "___ESP___" + pass.getText().toString().trim() + "___ESP___" + passn2.getText().toString().trim());
-                                        ocultaTeclado();
-                                    }else{
-                                        Toast.makeText(v.getContext(),"LAS CONTRSEÑAS NO COINCIDEN",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            }
-                        }else {
-                            pass.setText("");
-                            ocultaTeclado();
-                            Toast.makeText(v.getContext(),"DEBE INGRESAR SU CONTRSEÑA ACTUAL",Toast.LENGTH_SHORT).show();
-                        }
-                }
+                new AlertDialog
+                        .Builder(view.getContext()).setTitle("Aviso")
+                        .setMessage("Estas funciones están disponibles en nuestra nueve versión.\n\nActualiza ahora")
+                        .setNeutralButton("Descargar",(dialog, which) -> {
+                        })
+                        .show();
             }
         });
 

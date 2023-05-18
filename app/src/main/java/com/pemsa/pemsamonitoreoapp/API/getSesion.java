@@ -1,6 +1,7 @@
 package com.pemsa.pemsamonitoreoapp.API;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -28,13 +29,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class getSesion extends AsyncTask<String, Void, String> {
-
     ProgressDialog progressDialog;
-    Parametros geturl = new Parametros();
+    String email, password;
+    Parametros parametros = new Parametros();
     public static String JSON;
     Activity activity;
-    public getSesion(){
-
+    public getSesion(String email,String password){
+        this.password=password;
+        this.email=email;
     }
 
     public Activity getActivity() {
@@ -58,15 +60,21 @@ public class getSesion extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-
-        String cadena = geturl.url;
-       Log.d("Cadena de consulta",JSON);
-        String regreso = "";
-
-        if(strings[0].equals("1")){
-            //regreso = ObtenerSesion(cadena,strings[1]);
+        try {
+           Retrofit retrofit= parametros.Connection("");
+           InterfacesApi api = retrofit.create(InterfacesApi.class);
+            Response<JsonElement> response=api.InicioSesion(new User().getSession(email, password)).execute();
+            if(response.isSuccessful()){
+               return  response.body().toString();
+            }else{
+                JsonObject json=new JsonObject();
+                json.addProperty("status",false);
+                json.addProperty("msg",response.toString());
+                return json.toString();
+            }
+        }catch (Exception e){
+            return e.getMessage();
         }
-        return regreso;
     }
 
     @Override
@@ -104,43 +112,16 @@ public class getSesion extends AsyncTask<String, Void, String> {
             }
 
         } catch (JSONException e) {
-            Toast.makeText(activity.getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+            new AlertDialog.Builder(activity)
+                    .setTitle("Error")
+                    .setMessage(e.getMessage())
+                    .show();
         }
     }
 
     @Override
     protected void onCancelled(String s) {
         super.onCancelled(s);
-    }
-
-    public static String ObtenerSesion(String cadena, String param){
-
-        String email="",password="";
-        String[] separado=param.split("___ESP___");
-        email=separado[0];
-        password=separado[1];
-        Parametros parametros = new Parametros();
-        Retrofit retrofit = parametros.Connection("Sin token");
-        User user = new User();
-        InterfacesApi api = retrofit.create(InterfacesApi.class);
-        try {
-            Response<JsonElement> response = api.InicioSesion(user.getSession(email,password)).execute();
-            if(response.isSuccessful()){
-                JSON = response.body().toString();
-            }else{
-                JSON = response.toString();
-            }
-        } catch (IOException e) {
-            JsonObject obj1 = new JsonObject();
-            JsonObject obj2 = new JsonObject();
-            JsonArray errors = new JsonArray();
-            obj1.addProperty("status",false);
-            obj2.addProperty("msg",e.getMessage());
-            errors.add(obj2);
-            obj1.add("errors",errors);
-            JSON= obj1.toString();
-        }
-        return JSON;
     }
 
 }

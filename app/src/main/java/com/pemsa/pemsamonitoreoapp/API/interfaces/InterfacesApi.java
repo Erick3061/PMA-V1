@@ -5,17 +5,23 @@ import com.google.gson.JsonObject;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface InterfacesApi {
 
-    @POST("api/auth/loginUser")
+    @POST("auth")
     Call<JsonElement> InicioSesion(@Body JsonElement inicioSesion);
 
-    @GET("api/usuarios/getTodasCuentas/{Uid}")
-    Call<JsonElement> getAllAccount( @Path("Uid") String Uid);
+    @Headers({ "Content-Type: application/json"})
+    @GET("accounts/my-accounts")
+    Call<JsonElement> getAllAccount();
+
+    @Headers({ "Content-Type: application/json"})
+    @GET("accounts/my-groups")
+    Call<JsonElement> getGrupos();
 
     @GET("api/reportes/obtenerfecha")
     Call<JsonElement> getfecha();
@@ -23,29 +29,22 @@ public interface InterfacesApi {
     @GET("api/reportes/obtenerContactos")
     Call<JsonElement> getContacto();
 
-    @GET("api/usuarios/getCuentasGrupales/{Uid}")
-    Call<JsonElement> getGrupos( @Path("Uid") String Uid);
+    @Headers("Content-Type: application/json")
+    @POST("reports/ap-ci")
+    Call<JsonElement> getApCi(@Body JsonElement data);
+
+    @Headers("Content-Type: application/json")
+    @POST("reports/event-alarm")
+    Call<JsonElement> getEA(@Body JsonElement data);
 
     @GET("api/reportes/reporteBateria/{fecha}/{code}/{type}")
     Call<JsonElement> getPB( @Path("fecha") String fecha,@Path("code") String code,@Path("type") String type);
-
-    @GET("api/reportes/reporteApCiI/{FechaInicio}/{FechaFinal}/{cuenta}")
-    Call<JsonElement> getApCi(@Path("cuenta") String cuenta,@Path("FechaInicio") String FechaInicio,@Path("FechaFinal") String FechaFinal);
-
-    @GET("api/reportes/reporteEAI/{FechaInicio}/{FechaFinal}/{cuenta}")
-    Call<JsonElement> getEA(@Path("cuenta") String cuenta,@Path("FechaInicio") String FechaInicio,@Path("FechaFinal") String FechaFinal);
 
     @GET("api/reportes/reporteCuentasAbiertas/{fecha}/{code}/{type}")
     Call<JsonElement> getCuentasAbiertas( @Path("fecha") String fecha,@Path("code") String code,@Path("type") String type);
 
     @GET("api/reportes/reporteApCiG/{fecha}/{code}/{type}")
     Call<JsonElement> getApCiGoD( @Path("fecha") String fecha,@Path("code") String code,@Path("type") String type);
-
-    @POST("api/reportes/reporteAvanzadoApCi/{FechaInicio}/{FechaFinal}")
-    Call<JsonElement> getApCiA(@Body JsonObject Cuentas,@Path("FechaInicio") String FechaInicio,@Path("FechaFinal") String FechaFinal);
-
-    @POST("api/reportes/reporteAvanzadoEA/{FechaInicio}/{FechaFinal}")
-    Call<JsonElement> getEAA(@Body JsonObject Cuentas,@Path("FechaInicio") String FechaInicio,@Path("FechaFinal") String FechaFinal);
 
     @POST("api/usuarios/crearUsuario")
     Call<JsonElement> CrearUsuario(@Body JsonObject Datos);

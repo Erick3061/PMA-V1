@@ -2,12 +2,9 @@ package com.pemsa.pemsamonitoreoapp;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -24,11 +21,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.pemsa.pemsamonitoreoapp.API.getSesion;
-import com.pemsa.pemsamonitoreoapp.API.getVersion;
 import com.pemsa.pemsamonitoreoapp.TCAP.TCAP;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class InicioSesion extends AppCompatActivity {
     public static TextView TYCYAP,titulo,txtOlvideContra,txtRegistrarse,VersionApp;
@@ -37,10 +30,7 @@ public class InicioSesion extends AppCompatActivity {
     String C;
     String P;
     public static Activity activity;
-    public static String ver="";
-    public static String url="";
     getSesion sesion;
-    getVersion version;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,34 +48,9 @@ public class InicioSesion extends AppCompatActivity {
         TYCYAP=(TextView)findViewById(R.id.TermYCondYAviPriv);
         VersionApp = ( TextView )findViewById( R.id.VersionApp);
 
-        txtOlvideContra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //declaramos un Intent con la variable view para el context
-                if(Float.parseFloat(BuildConfig.VERSION_NAME) < Float.parseFloat(ver)){
-                    //Toast.makeText(activity.getApplicationContext(),s+"/n"+Float.parseFloat(BuildConfig.VERSION_NAME.toString()),Toast.LENGTH_LONG).show();
-                    actualizarApp2();
-                }else{
-                    Intent intent = new Intent (view.getContext(), olvide_contra.class);
-                    startActivityForResult(intent,0);
-                }
-            }
-        });
-        txtRegistrarse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Float.parseFloat(BuildConfig.VERSION_NAME) < Float.parseFloat(ver)){
-                    //Toast.makeText(activity.getApplicationContext(),s+"/n"+Float.parseFloat(BuildConfig.VERSION_NAME.toString()),Toast.LENGTH_LONG).show();
-                    actualizarApp2();
-                }else {
-                    Intent intent = new Intent(view.getContext(), registrarse.class);
-                    startActivityForResult(intent, 0);
-                }
-            }
-        });
-        version = new getVersion();
-        version.setActivity(activity);
-        version.execute("0");
+
+
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,16 +67,9 @@ public class InicioSesion extends AppCompatActivity {
                         if(Passsword.getText().toString().trim().equalsIgnoreCase("")){
                             Toast.makeText(getApplicationContext(),"DEBES INSERTAR UNA CONTRASEÑA",Toast.LENGTH_SHORT).show();
                         }else{
-                            if(Float.parseFloat(BuildConfig.VERSION_NAME) < Float.parseFloat(ver)){
-                                //Toast.makeText(activity.getApplicationContext(),s+"/n"+Float.parseFloat(BuildConfig.VERSION_NAME.toString()),Toast.LENGTH_LONG).show();
-                                actualizarApp2();
-                            }else {
-                                C = Correo.getText().toString();
-                                P = Passsword.getText().toString();
-                                sesion = new getSesion();
+                                sesion = new getSesion(Correo.getText().toString(),Passsword.getText().toString());
                                 sesion.setActivity(activity);
-                                sesion.execute("1", C + "___ESP___" + P);
-                            }
+                                sesion.execute();
                         }
                     }
                 }
@@ -135,36 +93,6 @@ public class InicioSesion extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         android.os.Process.killProcess(android.os.Process.myPid()); //Su funcion es algo similar a lo que se llama cuando se presiona el botón "Forzar Detención" o "Administrar aplicaciones", lo cuál mata la aplicación
-                    }
-                }).show();
-    }
-    public static void actualizarApp() {
-        new AlertDialog.Builder(activity)
-                .setTitle("HAY UNA NUEVA ACTUALIZACION\n ACTUALIZA PARA CONTINUAR")
-                .setCancelable(false)
-                .setNegativeButton(android.R.string.cancel,null)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {// un listener que al pulsar, cierre la aplicacion
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                       //String link="https://drive.google.com/file/d/1gxI7S2pZ_ueu227n9f3U6Fid2Ueca8K4/view?usp=sharing";
-                        Uri uri = Uri.parse(url);
-                        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-                        activity.startActivity(intent);
-                    }
-                }).show();
-    }
-    public static void actualizarApp2() {
-        new AlertDialog.Builder(activity)
-                .setTitle("ACTUALIZA LA APLICACIÓN PARA CONTINUAR")
-                .setCancelable(false)
-                .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {// un listener que al pulsar, cierre la aplicacion
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //String link="https://drive.google.com/file/d/1gxI7S2pZ_ueu227n9f3U6Fid2Ueca8K4/view?usp=sharing";
-                        Uri uri = Uri.parse(url);
-                        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-                        activity.startActivity(intent);
                     }
                 }).show();
     }
